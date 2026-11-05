@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://art/floor.png" id="1_floor"]
+[ext_resource type="Texture2D" path="res://art/wall.png" id="3_wall"]
+[ext_resource type="PackedScene" path="res://world/water_station.tscn" id="2_station"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
+size = Vector2(1600, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vertical"]
+size = Vector2(64, 992)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_partition"]
+size = Vector2(64, 320)
+
+[node name="ShipRoom" type="Node2D"]
+
+[node name="Floor" type="TextureRect" parent="."]
+z_index = -1
+texture_filter = 1
+scale = Vector2(4, 4)
+offset_right = 400.0
+offset_bottom = 248.0
+mouse_filter = 2
+texture = ExtResource("1_floor")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="TopTiles" type="TextureRect" parent="Walls"]
+texture_filter = 1
+scale = Vector2(4, 4)
+offset_right = 400.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource("3_wall")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="BottomTiles" type="TextureRect" parent="Walls"]
+texture_filter = 1
+scale = Vector2(4, 4)
+offset_top = 928.0
+offset_right = 400.0
+offset_bottom = 944.0
+mouse_filter = 2
+texture = ExtResource("3_wall")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="LeftTiles" type="TextureRect" parent="Walls"]
+texture_filter = 1
+scale = Vector2(4, 4)
+offset_right = 16.0
+offset_bottom = 248.0
+mouse_filter = 2
+texture = ExtResource("3_wall")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="RightTiles" type="TextureRect" parent="Walls"]
+texture_filter = 1
+scale = Vector2(4, 4)
+offset_left = 1536.0
+offset_right = 1552.0
+offset_bottom = 248.0
+mouse_filter = 2
+texture = ExtResource("3_wall")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="UpperPartitionTiles" type="TextureRect" parent="Walls"]
+texture_filter = 1
+scale = Vector2(4, 4)
+offset_left = 960.0
+offset_top = 64.0
+offset_right = 976.0
+offset_bottom = 144.0
+mouse_filter = 2
+texture = ExtResource("3_wall")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="LowerPartitionTiles" type="TextureRect" parent="Walls"]
+texture_filter = 1
+scale = Vector2(4, 4)
+offset_left = 960.0
+offset_top = 608.0
+offset_right = 976.0
+offset_bottom = 688.0
+mouse_filter = 2
+texture = ExtResource("3_wall")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(800, 32)
+shape = SubResource("RectangleShape2D_horizontal")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(800, 960)
+shape = SubResource("RectangleShape2D_horizontal")
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(32, 496)
+shape = SubResource("RectangleShape2D_vertical")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1568, 496)
+shape = SubResource("RectangleShape2D_vertical")
+
+[node name="UpperPartition" type="CollisionShape2D" parent="Walls"]
+position = Vector2(992, 224)
+shape = SubResource("RectangleShape2D_partition")
+
+[node name="WaterStation" parent="." instance=ExtResource("2_station")]
+position = Vector2(848, 496)
+
+[node name="LowerPartition" type="CollisionShape2D" parent="Walls"]
+position = Vector2(992, 768)
+shape = SubResource("RectangleShape2D_partition")
+
